@@ -12,7 +12,7 @@ const Header = () => {
           </Avatar>
           <div>
             <h1 className="text-4xl md:text-5xl font-bold mb-3">
-              Dra. Marina Silva
+              Dra. Thainá Magalhães
             </h1>
             <p className="text-xl md:text-2xl opacity-90 font-light">
               Cirurgiã-Dentista • CRO 12345
