@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Dra. Marina Silva</h3>
+            <h3 className="text-xl font-bold mb-4">Dra. Thainá Magalhães</h3>
             <p className="text-primary-foreground/80 leading-relaxed">
               Cirurgiã-Dentista dedicada a proporcionar o melhor cuidado 
               para a saúde bucal de seus pacientes, sempre com carinho 
@@ -23,7 +23,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5" />
-                <span>contato@dramarinas.com.br</span>
+                <span>thainamagalhaes12@gmail.com</span>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5" />
