@@ -33,6 +33,12 @@ const AppointmentForm = () => {
     "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"
   ];
 
+  // Função para formatar a data
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR');
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -46,21 +52,50 @@ const AppointmentForm = () => {
       return;
     }
 
-    // Aqui você integraria com um backend ou sistema de agendamento
-    toast({
-      title: "Agendamento solicitado!",
-      description: "Entraremos em contato em breve para confirmar seu agendamento.",
-    });
+    try {
+      // Criar mensagem personalizada para WhatsApp
+      const message = `Olá Dra. Thainá Magalhães! Gostaria de agendar uma consulta na clínica com os seguintes dados:
 
-    // Limpar formulário
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      date: "",
-      time: "",
-      procedure: ""
-    });
+Nome: ${formData.name}
+Telefone: ${formData.phone}
+Email: ${formData.email}
+Data Preferida: ${formatDate(formData.date)}
+Horário: ${formData.time}
+Procedimento: ${formData.procedure}
+
+Aguardo confirmação da disponibilidade. Obrigado!`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappNumber = "5511945491345";
+    
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      
+      window.open(whatsappUrl, "_blank");
+      
+      // Mostrar toast de sucesso
+      toast({
+        title: "Redirecionando para WhatsApp!",
+        description: "Você será direcionado para o WhatsApp com sua mensagem pronta.",
+      });
+
+      // Limpar formulário após sucesso
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        date: "",
+        time: "",
+        procedure: ""
+      });
+
+    } catch (error) {
+      console.error("Erro ao abrir WhatsApp:", error);
+      toast({
+        title: "Erro",
+        description: "Falha ao abrir o WhatsApp. Tente novamente.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -193,7 +228,7 @@ const AppointmentForm = () => {
                   size="lg"
                   className="w-full md:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground shadow-soft hover:shadow-elegant transition-all duration-300"
                 >
-                  Solicitar Agendamento
+                  Enviar via WhatsApp
                 </Button>
               </div>
             </form>
